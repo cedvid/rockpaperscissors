@@ -1,0 +1,78 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: black;
+  color: #03A062;
+  font-family: "Press Start 2P", cursive;
+}
+
+h1 {
+  margin-bottom: 1.5em;
+}
+
+.instructions {
+  margin: auto;
+  width: 30%;
+  line-height: 1.5em;
+}
+
+button {
+  font-family: "Press Start 2P", cursive;
+  background-color: black;
+  color: #03A062;
+  font-weight: bold;
+  margin-top: 2em;
+  padding: 1em;
+  border: 1px solid #037a4a;
+}
+button:hover {
+  border: 3px solid #037a4a;
+  color: white;
+}
+
+.main {
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 0.5em;
+}
+.main .playerSide {
+  margin: 2em;
+}
+.main .playerSide .button.hover-on {
+  margin-bottom: 1em;
+  width: auto;
+  height: 7em;
+}
+.main .playerSide .button.hover-on:hover {
+  border: 5px solid #03A062;
+}
+.main .playerSide .button {
+  margin-bottom: 1em;
+  width: auto;
+  height: 7em;
+}
+.main .playerSide div {
+  margin: 0.5em;
+}
+.main .result-board {
+  visibility: hidden;
+  line-height: 2em;
+  padding: 2em;
+  margin-left: 5em;
+  margin-right: 5em;
+}
+.main .result-board .round-result, .main .result-board .final-result {
+  margin: 0.5em;
+  padding: 1em;
+  border: 1px dotted #03A062;
+}
+.main .result-board .final-result {
+  visibility: hidden;
+}/*# sourceMappingURL=style.css.map */
