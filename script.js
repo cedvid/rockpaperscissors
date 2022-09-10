@@ -17,8 +17,9 @@ let computerSelection;
 
 function start() {
     document.querySelector('.instructions').style.display = "none";
-    document.querySelector('.main').style.visibility = 'visible';
     document.querySelector(".start").style.display = "none";
+    document.querySelector('.main').classList.add('fade-in-anim');
+    document.querySelector('.main').style.visibility = 'visible';
 }
 
 for (const button of buttons) {
@@ -30,62 +31,78 @@ for (const button of buttons) {
 
 function playRound() {
     let computerSelection = choices[Math.floor(Math.random() * choices.length)];
-    document.querySelector('.result-board').style.visibility = 'visible';
+    resultBoard.classList.add('fade-in-anim');
+    resultBoard.style.visibility = 'visible';
+
 
     if ( playerSelection == "rock" && computerSelection == "paper" ) {
         computerScore++;
         compChoice.textContent = `COMPUTER PICKED: ${computerSelection.toUpperCase()}`;
         results.textContent = "Paper beats Rock. 1 point for the computer.";
         results.style.color = 'red';
-        userScoreCount.textContent = `PLAYER SCORE: ${playerScore}`;
-        compScoreCount.textContent = `COMPUTER SCORE: ${computerScore}`;
-
+        userScoreCount.textContent = `${playerScore}`;
+        compScoreCount.textContent = `${computerScore}`;
+        compScoreCount.classList.add("text-transform");
+        results.classList.add("text-transform");
+        
     } else if ( playerSelection == "paper" && computerSelection == "rock") {
         playerScore++;
         compChoice.textContent = `COMPUTER PICKED: ${computerSelection.toUpperCase()}`;
         results.textContent = "Paper beats Rock. 1 point for you!"
         results.style.color = '#03A062';
-        userScoreCount.textContent = `PLAYER SCORE: ${playerScore}`;
-        compScoreCount.textContent = `COMPUTER SCORE: ${computerScore}`;
+        userScoreCount.textContent = `${playerScore}`;
+        compScoreCount.textContent = `${computerScore}`;
+        userScoreCount.classList.add("text-transform");
+        results.classList.add("text-transform");
 
     } else if ( playerSelection == "scissors" && computerSelection ==  "rock") {
         computerScore++;
         compChoice.textContent = `COMPUTER PICKED: ${computerSelection.toUpperCase()}`;
         results.textContent = "Rock beats Scissors. 1 point for the computer"
         results.style.color = 'red';
-        userScoreCount.textContent = `PLAYER SCORE: ${playerScore}`;
-        compScoreCount.textContent = `COMPUTER SCORE: ${computerScore}`;
+        userScoreCount.textContent = `${playerScore}`;
+        compScoreCount.textContent = `${computerScore}`;
+        compScoreCount.classList.add("text-transform");
+        results.classList.add("text-transform");
 
     } else if ( playerSelection == "scissors" && computerSelection ==  "paper") {
         playerScore++;
         compChoice.textContent = `COMPUTER PICKED: ${computerSelection.toUpperCase()}`;
         results.textContent = "Scissors beat Paper. 1 point for you!"
         results.style.color = '#03A062';
-        userScoreCount.textContent = `PLAYER SCORE: ${playerScore}`;
-        compScoreCount.textContent = `COMPUTER SCORE: ${computerScore}`;
+        userScoreCount.textContent = `${playerScore}`;
+        compScoreCount.textContent = `${computerScore}`;
+        userScoreCount.classList.add("text-transform");
+        results.classList.add("text-transform");
 
     } else if ( playerSelection == "rock" && computerSelection ==  "scissors") {
         playerScore++;
-                compChoice.textContent = `COMPUTER PICKED: ${computerSelection.toUpperCase()}`;
+        compChoice.textContent = `COMPUTER PICKED: ${computerSelection.toUpperCase()}`;
         results.textContent = "Rock beats Scissors. 1 point for you!";
         results.style.color = '#03A062';
-        userScoreCount.textContent = `PLAYER SCORE: ${playerScore}`;
-        compScoreCount.textContent = `COMPUTER SCORE: ${computerScore}`;
+        userScoreCount.textContent = `${playerScore}`;
+        compScoreCount.textContent = `${computerScore}`;
+        userScoreCount.classList.add("text-transform");
+        results.classList.add("text-transform");
 
     } else if ( playerSelection == "paper" && computerSelection == "scissors") {
         computerScore++;
         compChoice.textContent = `COMPUTER PICKED: ${computerSelection.toUpperCase()}`;
         results.textContent = "Scissors beat Paper. 1 point for the computer"
         results.style.color = 'red';
-        userScoreCount.textContent = `PLAYER SCORE: ${playerScore}`;
-        compScoreCount.textContent = `COMPUTER SCORE: ${computerScore}`;
+        userScoreCount.textContent = `${playerScore}`;
+        compScoreCount.textContent = `${computerScore}`;
+        compScoreCount.classList.add("text-transform");
+        results.classList.add("text-transform");
 
     } else if ( playerSelection == computerSelection ) {
         compChoice.textContent = `COMPUTER ALSO PICKED: ${computerSelection.toUpperCase()}`;
         results.textContent = "It's a tie!"
         results.style.color = '#03A062';
-        userScoreCount.textContent = `PLAYER SCORE: ${playerScore}`;
-        compScoreCount.textContent = `COMPUTER SCORE: ${computerScore}`;
+        userScoreCount.textContent = `${playerScore}`;
+        compScoreCount.textContent = `${computerScore}`;
+        results.classList.add("text-transform");
+
     }
     checkWinner();
 }
@@ -99,6 +116,7 @@ function checkWinner() {
     }
 
     finalResult.style.visibility = 'visible';
+    finalResult.classList.add('fade-in-anim');
     playAgainBtn = document.createElement("button");
     playAgainBtn.textContent = "PLAY AGAIN";
     finalResult.appendChild(playAgainBtn);
@@ -106,11 +124,18 @@ function checkWinner() {
 
     }   if (playerScore == 5) {
         winner.textContent = "YOU SCORED 5 POINTS! YOU ARE THE WINNER!";
+        winner.style.color = '#03A062';
         } else if (computerScore == 5) {
         winner.textContent = 'THE COMPUTER BEAT YOU...BETTER LUCK NEXT TIME.';
         winner.style.color = 'red';
         }
 }
+
+[userScoreCount, compScoreCount, results].forEach((element)=>{
+    element.addEventListener('animationend', ()=>{
+      element.classList.remove("text-transform");
+   });
+});
 
 function playAgain() {
     // adds hover effect and make img clickable again for new game
@@ -123,8 +148,8 @@ function playAgain() {
     playAgainBtn.parentNode.removeChild(playAgainBtn);
     playerScore = 0;
     computerScore = 0;
-    userScoreCount.textContent = "PLAYER SCORE: 0";
-    compScoreCount.textContent = "COMPUTER SCORE: 0"
+    userScoreCount.textContent = "0";
+    compScoreCount.textContent = "0"
     winner.textContent = "";
 }
 
