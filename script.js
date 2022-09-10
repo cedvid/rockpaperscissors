@@ -5,6 +5,7 @@ const userScoreCount = document.querySelector('.playerScore');
 const compScoreCount = document.querySelector('.compScore')
 const compChoice = document.querySelector('.compChoice');
 const winner = document.querySelector('.winner');
+const resultBoard = document.querySelector('.result-board')
 const finalResult = document.querySelector('.final-result');
 let playAgainBtn;
 
@@ -22,7 +23,7 @@ function start() {
 
 for (const button of buttons) {
   button.addEventListener('click', () => {
-    playerSelection = button.value;
+    playerSelection = button.id;
     playRound();
   });
 }
@@ -91,17 +92,18 @@ function playRound() {
 
 function checkWinner() {
     if (playerScore == 5 || computerScore == 5) {
-    document.getElementById("rock").disabled = true;
-    document.getElementById('rock').classList.remove('hover-on');
-    document.getElementById("paper").disabled = true;
-    document.getElementById("paper").classList.remove('hover-on');
-    document.getElementById("scissors").disabled = true;
-    document.getElementById("scissors").classList.remove('hover-on');
-    document.querySelector('.final-result').style.visibility = 'visible';
+    // when game is over remove hover effect and make img unclickable
+    for (const button of buttons) {
+        button.disabled = true;
+        button.classList.remove('hover-on');
+    }
+
+    finalResult.style.visibility = 'visible';
     playAgainBtn = document.createElement("button");
     playAgainBtn.textContent = "PLAY AGAIN";
     finalResult.appendChild(playAgainBtn);
     playAgainBtn.addEventListener("click", playAgain);
+
     }   if (playerScore == 5) {
         winner.textContent = "YOU SCORED 5 POINTS! YOU ARE THE WINNER!";
         } else if (computerScore == 5) {
@@ -111,20 +113,19 @@ function checkWinner() {
 }
 
 function playAgain() {
-    document.getElementById("rock").classList.add('hover-on');
-    document.getElementById("paper").classList.add('hover-on');
-    document.getElementById("scissors").classList.add('hover-on');
-    document.querySelector('.result-board').style.visibility = 'hidden';
-    document.querySelector('.final-result').style.visibility = 'hidden';
+    // adds hover effect and make img clickable again for new game
+    for (const button of buttons) {
+        button.classList.add('hover-on');
+        button.disabled = false;
+    }
+    resultBoard.style.visibility = 'hidden';
+    finalResult.style.visibility = 'hidden';
+    playAgainBtn.parentNode.removeChild(playAgainBtn);
     playerScore = 0;
     computerScore = 0;
     userScoreCount.textContent = "PLAYER SCORE: 0";
     compScoreCount.textContent = "COMPUTER SCORE: 0"
     winner.textContent = "";
-    playAgainBtn.parentNode.removeChild(playAgainBtn);
-    document.getElementById("rock").disabled = false;
-    document.getElementById("paper").disabled = false;
-    document.getElementById("scissors").disabled = false;
 }
 
 startBtn.addEventListener('click', start);
