@@ -1,4 +1,5 @@
 html, body {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -26,9 +27,11 @@ button {
     margin-top: 2em;
     padding: 1em;
     border: 1px solid #037a4a;
+    transition: ease-out 0.3s;
 
     &:hover {
-        border: 3px solid #037a4a;
+        border: 1px solid white;
+        box-shadow: 0.1em 0.1em 2em #03A062; 
         color: white;
     }
 }
@@ -43,11 +46,14 @@ button {
         margin: 2em;
 
         .button.hover-on {
+            box-sizing: border-box;
             margin-bottom: 1em;
             width: auto;
             height: 7em;
             &:hover {
-                border: 5px solid #03A062;
+                transition: ease-out 0.2s;
+                transform: scale(1.1);
+                box-shadow: 0.5em 0.5em 3em #03A062; 
             }
         }
 
