@@ -7,6 +7,9 @@ const compChoice = document.querySelector('.compChoice');
 const winner = document.querySelector('.winner');
 const resultBoard = document.querySelector('.result-board')
 const finalResult = document.querySelector('.final-result');
+const clickAudio = document.querySelector('#click');
+const startAudio = document.querySelector('#start');
+
 let playAgainBtn;
 
 let playerScore = 0;
@@ -16,6 +19,7 @@ let playerSelection;
 let computerSelection;
 
 function start() {
+    startAudio.play();
     document.querySelector('.instructions').style.display = "none";
     document.querySelector(".start").style.display = "none";
     document.querySelector('.main').classList.add('fade-in-anim');
@@ -25,13 +29,15 @@ function start() {
 for (const button of buttons) {
   button.addEventListener('click', () => {
     playerSelection = button.id;
+    clickAudio.currentTime = 0;
+    clickAudio.play();
     playRound();
   });
 }
 
 function playRound() {
     let computerSelection = choices[Math.floor(Math.random() * choices.length)];
-    resultBoard.classList.add('fade-in-anim');
+    // resultBoard.classList.add('fade-in-anim');
     resultBoard.style.visibility = 'visible';
 
 
@@ -138,6 +144,7 @@ function checkWinner() {
 });
 
 function playAgain() {
+    startAudio.play();
     // adds hover effect and make img clickable again for new game
     for (const button of buttons) {
         button.classList.add('hover-on');
