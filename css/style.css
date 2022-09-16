@@ -7,9 +7,27 @@ html, body {
   overflow-x: hidden;
   text-align: center;
   text-transform: uppercase;
-  background-color: black;
+  background: black;
   color: #03A062;
   font-family: "Press Start 2P", cursive;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.header button {
+  position: absolute;
+  background-color: #03A062;
+  right: 15px;
+  top: -15px;
+  padding: 2px;
+}
+.header button:hover {
+  background-color: white;
+  transform: scale(1.1);
 }
 
 @-webkit-keyframes fadeIn {

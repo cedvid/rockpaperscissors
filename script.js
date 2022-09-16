@@ -11,17 +11,30 @@ const clickAudio = document.querySelector('#click');
 const startAudio = document.querySelector('#start');
 const winAudio = document.querySelector('#win');
 const loseAudio = document.querySelector('#lose');
+const onOffBtn = document.querySelector('.sound-icon');
 
 let playAgainBtn;
-
 let playerScore = 0;
 let computerScore = 0;
 let choices = ["rock","paper", "scissors"];
 let playerSelection;
 let computerSelection;
+let audioStatus = 'on';
+
+onOffBtn.addEventListener('click', setAudio);
+
+function setAudio() {
+    if (audioStatus == 'on') {
+        audioStatus = 'off';
+        onOffBtn.src = 'images/off.svg';
+    } else if (audioStatus == 'off') {
+        audioStatus = 'on';
+        onOffBtn.src = 'images/on.svg';
+    }
+}
 
 function start() {
-    startAudio.play();
+    if (audioStatus !== 'off') startAudio.play();
     document.querySelector('.instructions').style.display = "none";
     document.querySelector(".start").style.display = "none";
     document.querySelector('.main').classList.add('fade-in-anim');
@@ -32,7 +45,7 @@ for (const button of buttons) {
   button.addEventListener('click', () => {
     playerSelection = button.id;
     clickAudio.currentTime = 0;
-    clickAudio.play();
+    if (audioStatus !== 'off') clickAudio.play();
     playRound();
   });
 }
@@ -130,11 +143,11 @@ function checkWinner() {
     playAgainBtn.addEventListener("click", playAgain);
 
     }   if (playerScore == 5) {
-        winAudio.play();
+        if (audioStatus !== 'off') winAudio.play();
         winner.textContent = "YOU SCORED 5 POINTS! YOU ARE THE WINNER!";
         winner.style.color = '#03A062';
         } else if (computerScore == 5) {
-        loseAudio.play();
+        if (audioStatus !== 'off') loseAudio.play();
         winner.textContent = 'THE COMPUTER BEAT YOU...BETTER LUCK NEXT TIME.';
         winner.style.color = 'red';
         }
@@ -147,7 +160,7 @@ function checkWinner() {
 });
 
 function playAgain() {
-    startAudio.play();
+    if (audioStatus !== 'off') startAudio.play();
     for (const button of buttons) {
         button.classList.add('hover-on');
         button.disabled = false;
