@@ -9,6 +9,8 @@ const resultBoard = document.querySelector('.result-board')
 const finalResult = document.querySelector('.final-result');
 const clickAudio = document.querySelector('#click');
 const startAudio = document.querySelector('#start');
+const winAudio = document.querySelector('#win');
+const loseAudio = document.querySelector('#lose');
 
 let playAgainBtn;
 
@@ -115,7 +117,6 @@ function playRound() {
 
 function checkWinner() {
     if (playerScore == 5 || computerScore == 5) {
-    // when game is over remove hover effect and make img unclickable
     for (const button of buttons) {
         button.disabled = true;
         button.classList.remove('hover-on');
@@ -129,9 +130,11 @@ function checkWinner() {
     playAgainBtn.addEventListener("click", playAgain);
 
     }   if (playerScore == 5) {
+        winAudio.play();
         winner.textContent = "YOU SCORED 5 POINTS! YOU ARE THE WINNER!";
         winner.style.color = '#03A062';
         } else if (computerScore == 5) {
+        loseAudio.play();
         winner.textContent = 'THE COMPUTER BEAT YOU...BETTER LUCK NEXT TIME.';
         winner.style.color = 'red';
         }
@@ -145,7 +148,6 @@ function checkWinner() {
 
 function playAgain() {
     startAudio.play();
-    // adds hover effect and make img clickable again for new game
     for (const button of buttons) {
         button.classList.add('hover-on');
         button.disabled = false;
